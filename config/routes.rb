@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :recommendations
+
   resources :restaurants do
     get :recommendation, on: :collection
   end
