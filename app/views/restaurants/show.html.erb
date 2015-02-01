@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @restaurant.name %>
@@ -27,6 +25,8 @@
    </p>
 <% end %>
 
+<% if can_add_rating? %>
 <%= link_to 'Add Rating', new_rating_path(restaurant_id: @restaurant.id) %><br><br>
+<% end %>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

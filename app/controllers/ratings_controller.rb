@@ -16,33 +16,45 @@ class RatingsController < ApplicationController
   end
 
   def create
+    update_date_params
+    @rating = Rating.new(rating_params)
+    @restaurant = @rating.restaurant
+
+    if @rating.save
+      redirect_to @restaurant, notice: 'Rating was successfully created.'
+    else
+      render :new
+    end
+  end
+
+  def update
+    update_date_params
+    @restaurant = @rating.restaurant
+
+    if @rating.update(rating_params)
+      redirect_to @restaurant, notice: 'Rating was successfully updated.'
+    else
+      render :edit
+    end
+  end
+
+  private
+  def set_rating
+    @rating = Rating.find(params[:id])
+  end
+
+  def set_restaurant
+    @restaurant = @rating.restaurant
+  end
+
+  def rating_params
+    params.require(:rating).permit(:rate, :user_id, :restaurant_id, :last_visited)
+  end
+
+  def update_date_params
     # Ensure the date is parsed correctly to avoid an ArgumentError
     if !params[:rating][:last_visited].empty?
       params[:rating][:last_visited] = DateTime.strptime(rating_params[:last_visited], '%m/%d/%Y')
     end
-
-    @rating = Rating.new(rating_params)
-    @rating.save
-    @restaurant = @rating.restaurant
-    respond_with(@restaurant)
   end
-
-  def update
-    @rating.update(rating_params)
-    @restaurant = @rating.restaurant
-    respond_with(@restaurant)
-  end
-
-  private
-    def set_rating
-      @rating = Rating.find(params[:id])
-    end
-
-    def set_restaurant
-      @restaurant = @rating.restaurant
-    end
-
-    def rating_params
-      params.require(:rating).permit(:rate, :user_id, :restaurant_id, :last_visited)
-    end
 end
