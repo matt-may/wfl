@@ -36,6 +36,10 @@ class RestaurantsController < ApplicationController
     respond_with(@restaurant)
   end
 
+  def recommendation
+
+  end
+
   private
     def set_restaurant
       @restaurant = Restaurant.find(params[:id])

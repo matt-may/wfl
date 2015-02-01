@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :restaurants
+  resources :restaurants do
+    get :recommendation, on: :collection
+  end
 
   resources :ratings
 
@@ -58,4 +60,6 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  root to: 'restaurants#recommendation'
 end
