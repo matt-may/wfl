@@ -3,11 +3,6 @@ class RatingsController < ApplicationController
   before_action :set_restaurant, only: [:show, :edit]
   respond_to :html
 
-  def index
-    @ratings = Rating.all
-    respond_with(@ratings)
-  end
-
   def show
     respond_with(@rating)
   end
@@ -21,6 +16,11 @@ class RatingsController < ApplicationController
   end
 
   def create
+    # Ensure the date is parsed correctly to avoid an ArgumentError
+    if !params[:rating][:last_visited].empty?
+      params[:rating][:last_visited] = DateTime.strptime(rating_params[:last_visited], '%m/%d/%Y')
+    end
+
     @rating = Rating.new(rating_params)
     @rating.save
     @restaurant = @rating.restaurant
@@ -29,12 +29,8 @@ class RatingsController < ApplicationController
 
   def update
     @rating.update(rating_params)
-    respond_with(@rating)
-  end
-
-  def destroy
-    @rating.destroy
-    respond_with(@rating)
+    @restaurant = @rating.restaurant
+    respond_with(@restaurant)
   end
 
   private
@@ -47,6 +43,6 @@ class RatingsController < ApplicationController
     end
 
     def rating_params
-      params.require(:rating).permit(:rate, :user_id, :restaurant_id)
+      params.require(:rating).permit(:rate, :user_id, :restaurant_id, :last_visited)
     end
 end

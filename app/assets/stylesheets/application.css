@@ -11,6 +11,7 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require jquery-ui
  *= require_self
  */
 
@@ -20,4 +21,8 @@
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
+}
+
+.padded-bottom {
+    padding-bottom: 5px;
 }

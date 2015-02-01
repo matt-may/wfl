@@ -17,7 +17,7 @@
   </div>
   <div class="field">
     <%= f.label :last_visited %><br>
-    <%= f.text_field :last_visited %>
+    <%= f.text_field :last_visited, class: 'datepicker' %>
   </div>
   <%= f.hidden_field :user_id, value: current_user.id %>
   <%= f.hidden_field :restaurant_id, value: params[:restaurant_id] || @restaurant.id %>
@@ -25,3 +25,9 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+<script>
+    $(function() {
+        $('.datepicker').datepicker();
+    });
+</script>

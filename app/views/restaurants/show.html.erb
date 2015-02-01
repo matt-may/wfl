@@ -14,9 +14,18 @@
   <%= @restaurant.description %>
 </p>
 
-<p>
+<h3>Ratings</h3>
 
-</p>
+<% @restaurant.ratings.each do |rating| %>
+   <p>
+     Rated <%= rating.rate %> by <%= rating.user.email %>
+     <% if rating.last_visited %>
+         who last visited at
+         <%= rating.last_visited.strftime('%m/%d/%Y')%>
+     <% end %>
+     <%= link_to '[edit]', edit_rating_path(rating) if rating.user == current_user %>
+   </p>
+<% end %>
 
 <%= link_to 'Add Rating', new_rating_path(restaurant_id: @restaurant.id) %><br><br>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |

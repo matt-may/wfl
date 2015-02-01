@@ -37,6 +37,9 @@ end
 # Paperclip for avatars
 gem 'paperclip', '~> 4.2'
 
+# JQuery UI
+gem 'jquery-ui-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
