@@ -29,6 +29,11 @@ gem 'spring',        group: :development
 # User auth
 gem 'devise'
 
+# RSpec for examples
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
