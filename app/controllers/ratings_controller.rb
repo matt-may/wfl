@@ -1,6 +1,6 @@
 class RatingsController < ApplicationController
   before_action :set_rating, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_restaurant, only: [:show, :edit]
   respond_to :html
 
   def index
@@ -23,7 +23,8 @@ class RatingsController < ApplicationController
   def create
     @rating = Rating.new(rating_params)
     @rating.save
-    respond_with(@rating)
+    @restaurant = @rating.restaurant
+    respond_with(@restaurant)
   end
 
   def update
@@ -39,6 +40,10 @@ class RatingsController < ApplicationController
   private
     def set_rating
       @rating = Rating.find(params[:id])
+    end
+
+    def set_restaurant
+      @restaurant = @rating.restaurant
     end
 
     def rating_params

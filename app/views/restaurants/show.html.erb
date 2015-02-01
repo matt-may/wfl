@@ -5,10 +5,19 @@
   <%= @restaurant.name %>
 </p>
 
+<div class="round">
+  <%= image_tag @restaurant.avatar.url %>
+</div>
+
 <p>
   <strong>Description:</strong>
   <%= @restaurant.description %>
 </p>
 
+<p>
+
+</p>
+
+<%= link_to 'Add Rating', new_rating_path(restaurant_id: @restaurant.id) %><br><br>
 <%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>
