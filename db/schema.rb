@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150201183139) do
+ActiveRecord::Schema.define(version: 20150201190907) do
 
   create_table "ratings", force: true do |t|
     t.integer  "rate"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20150201183139) do
     t.integer  "restaurant_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "last_visited"
   end
 
   add_index "ratings", ["restaurant_id"], name: "index_ratings_on_restaurant_id"
