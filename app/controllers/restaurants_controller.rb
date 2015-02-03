@@ -9,6 +9,7 @@ class RestaurantsController < ApplicationController
   end
 
   def show
+    @ratings = @restaurant.ratings
     respond_with(@restaurant)
   end
 
@@ -34,10 +35,6 @@ class RestaurantsController < ApplicationController
   def destroy
     @restaurant.destroy
     respond_with(@restaurant)
-  end
-
-  def recommendation
-
   end
 
   private

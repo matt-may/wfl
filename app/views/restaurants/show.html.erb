@@ -12,9 +12,12 @@
   <%= @restaurant.description %>
 </p>
 
-<h3>Ratings</h3>
+<p>
+  <strong>Ratings</strong>
+</p>
 
-<% @restaurant.ratings.each do |rating| %>
+<% unless @ratings.empty? %>
+<% @ratings.each do |rating| %>
    <p>
      Rated <%= rating.rate %> by <%= rating.user.email %>
      <% if rating.last_visited %>
@@ -24,9 +27,13 @@
      <%= link_to '[edit]', edit_rating_path(rating) if rating.user == current_user %>
    </p>
 <% end %>
+<% else %>
+<p>No ratings yet.</p>
+<% end %>
 
 <% if can_add_rating? %>
 <%= link_to 'Add Rating', new_rating_path(restaurant_id: @restaurant.id) %><br><br>
 <% end %>
-<%= link_to 'Edit', edit_restaurant_path(@restaurant) %> |
+
+<%= link_to 'Edit Restaurant', edit_restaurant_path(@restaurant) %> |
 <%= link_to 'Back', restaurants_path %>

@@ -1,5 +1,7 @@
 <p id="notice"><%= notice %></p>
 
+
+<% if Restaurant.count > 0 %>
 <p>
   <strong>Date:</strong>
   <%= @recommendation.date %>
@@ -10,10 +12,7 @@
   <%= @recommendation.restaurant %>
 </p>
 
-<p>
-  <strong>User:</strong>
-  <%= @recommendation.user %>
-</p>
-
-<%= link_to 'Edit', edit_recommendation_path(@recommendation) %> |
-<%= link_to 'Back', recommendations_path %>
+<%= link_to 'All Restaurants', restaurants_path %>
+<% else %>
+<p>No restaurants in the database yet. <%= link_to 'Add one', new_restaurant_path %> to start receiving recommendations.</p>
+<% end %>
