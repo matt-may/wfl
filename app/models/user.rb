@@ -5,4 +5,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :ratings
+
+  def ate_at_yesterday
+    unless (last_visited = self.ratings.where(last_visited: Date.today-1)).empty?
+      last_visited.first.restaurant
+    else nil; end
+  end
 end

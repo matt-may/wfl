@@ -2,7 +2,6 @@ module Recommender
   class Recommendation
     def initialize(user)
       @user = user
-      @ratings = user.ratings
     end
   end
 
@@ -11,11 +10,7 @@ module Recommender
       super
     end
 
-
-
-
+    def today
+    end
   end
 end
-
-# assuming ratings are equal => choose one we've visited most not-recently
-# assuming no last_visited
