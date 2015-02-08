@@ -1,4 +1,5 @@
 class RatingsController < ApplicationController
+  before_filter :authenticate_user!
   before_action :set_rating, only: [:show, :edit, :update]
   before_action :set_restaurant, only: [:show, :edit]
   respond_to :html
