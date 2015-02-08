@@ -1,5 +1,5 @@
 class RatingsController < ApplicationController
-  before_action :set_rating, only: [:show, :edit, :update, :destroy]
+  before_action :set_rating, only: [:show, :edit, :update]
   before_action :set_restaurant, only: [:show, :edit]
   respond_to :html
 
@@ -8,6 +8,9 @@ class RatingsController < ApplicationController
   end
 
   def new
+    unless Restaurant.find_by_id(params[:restaurant_id])
+      redirect_to(restaurants_path, notice: 'Restaurant was not found.') and return
+    end
     @rating = Rating.new
     respond_with(@rating)
   end
@@ -52,8 +55,7 @@ class RatingsController < ApplicationController
   end
 
   def update_date_params
-    # Ensure the date is parsed correctly to avoid an ArgumentError
-    if !params[:rating][:last_visited].empty?
+    if params[:rating][:last_visited] != ''
       params[:rating][:last_visited] = DateTime.strptime(rating_params[:last_visited], '%m/%d/%Y')
     end
   end

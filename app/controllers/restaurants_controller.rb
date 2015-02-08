@@ -23,8 +23,11 @@ class RestaurantsController < ApplicationController
 
   def create
     @restaurant = Restaurant.new(restaurant_params)
-    @restaurant.save
-    respond_with(@restaurant)
+    if @restaurant.save
+      redirect_to new_rating_path(restaurant_id: @restaurant.id)
+    else
+      render :new
+    end
   end
 
   def update

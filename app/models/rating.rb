@@ -7,7 +7,7 @@ class Rating < ActiveRecord::Base
 
   private
   def last_visited_must_be_in_past
-    if self.last_visited && self.last_visited >= DateTime.now.end_of_day
+    if self.last_visited && (self.last_visited > Date.today)
       errors.add(:last_visited, 'must be today or in the past.')
     end
   end

@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<h1>What's for Lunch?</h1>
 
 <% if Restaurant.count > 0 %>
 <p>
@@ -8,8 +7,8 @@
 </p>
 
 <p>
-  <strong>Restaurant:</strong>
-  <%= @recommendation.restaurant %>
+  <strong>Today, you should go to:</strong>
+  <%= link_to @recommendation.restaurant.name, @recommendation.restaurant %>
 </p>
 
 <%= link_to 'All Restaurants', restaurants_path %>
