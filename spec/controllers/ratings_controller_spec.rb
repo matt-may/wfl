@@ -19,6 +19,10 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe RatingsController, :type => :controller do
+  before(:each) do
+    user = create(:user)
+    sign_in(:user, user)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Rating. As you add validations to Rating, be sure to
@@ -54,7 +58,8 @@ RSpec.describe RatingsController, :type => :controller do
 
   describe "GET new" do
     it "assigns a new rating as @rating" do
-      get :new, {}, valid_session
+      restaurant = create(:restaurant)
+      get :new, {restaurant_id: restaurant.id}, valid_session
       expect(assigns(:rating)).to be_a_new(Rating)
     end
   end

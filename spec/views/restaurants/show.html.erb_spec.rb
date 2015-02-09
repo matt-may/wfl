@@ -7,10 +7,4 @@ RSpec.describe "restaurants/show", :type => :view do
       :description => "Description"
     ))
   end
-
-  it "renders attributes in <p>" do
-    render
-    expect(rendered).to match(/Name/)
-    expect(rendered).to match(/Description/)
-  end
 end

@@ -11,7 +11,8 @@ class Restaurant < ActiveRecord::Base
     else nil; end
   end
 
-  def score(user, last_visited_max)
+  def score(user)
+    last_visited_max = user.last_visited_max
     ratings = user.ratings.where(restaurant_id: self.id)
 
     return 0.0 if ratings.empty? || last_visited_max.nil?

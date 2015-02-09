@@ -12,7 +12,7 @@ class LunchRecommender
   # * a +Recommendation+ object (if we were able to create one), else nil.
   #
   def today
-    sorted_restaurants = Restaurant.all.sort_by { |restaurant| restaurant.score(@user, @user.last_visited_max) }
+    sorted_restaurants = Restaurant.all.sort_by { |restaurant| restaurant.score(@user) }
     recommended_restaurant = sorted_restaurants.last
 
     begin

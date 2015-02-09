@@ -2,10 +2,15 @@ require 'rails_helper'
 
 RSpec.describe "ratings/edit", :type => :view do
   before(:each) do
+    user = create(:user)
+    sign_in user
+
+    @restaurant = assign(:restaurant, create(:restaurant))
     @rating = assign(:rating, Rating.create!(
       :rate => 1,
-      :user => nil,
-      :restaurant => nil
+      :user => user,
+      :restaurant => @restaurant,
+      :last_visited => Date.today-1
     ))
   end
 

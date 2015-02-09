@@ -19,13 +19,17 @@ require 'rails_helper'
 # that an instance is receiving a specific message.
 
 RSpec.describe RestaurantsController, :type => :controller do
+  before(:each) do
+    user = create(:user)
+    sign_in(:user, user)
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Restaurant. As you add validations to Restaurant, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+  let(:valid_attributes) do
+    attributes_for(:restaurant)
+  end
 
   let(:invalid_attributes) {
     skip("Add a hash of attributes invalid for your model")
@@ -81,9 +85,9 @@ RSpec.describe RestaurantsController, :type => :controller do
         expect(assigns(:restaurant)).to be_persisted
       end
 
-      it "redirects to the created restaurant" do
+      it "redirects to the ratings/add page" do
         post :create, {:restaurant => valid_attributes}, valid_session
-        expect(response).to redirect_to(Restaurant.last)
+        expect(response).to redirect_to(new_rating_path(restaurant_id: assigns(:restaurant).id))
       end
     end
 
