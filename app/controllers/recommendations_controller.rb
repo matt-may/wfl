@@ -1,4 +1,4 @@
-require 'lunch_recommender'
+require 'recommender/lunch_recommender'
 
 class RecommendationsController < ApplicationController
   before_filter :authenticate_user!
