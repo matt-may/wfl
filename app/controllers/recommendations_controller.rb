@@ -4,7 +4,8 @@ class RecommendationsController < ApplicationController
   before_filter :authenticate_user!
 
   def show
-    if rec = Recommendation.find_by_date(Date.today)
+    rec = Recommendation.where(date: Date.today, user: current_user)
+    if rec != []
       @recommendation = rec
     elsif Restaurant.count > 0
       recommendation = LunchRecommender.new(current_user)
