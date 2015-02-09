@@ -6,7 +6,7 @@ class RecommendationsController < ApplicationController
   def show
     rec = Recommendation.where(date: Date.today, user: current_user)
     if rec != []
-      @recommendation = rec
+      @recommendation = rec.first
     elsif Restaurant.count > 0
       recommendation = LunchRecommender.new(current_user)
       result, recommendation = recommendation.today
